@@ -1,0 +1,119 @@
+Alter table
+alter table products add column name varchar(20) after name;
+
+CREATE TABLE user(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+email VARCHAR(256),
+password VARCHAR(256),
+fullname VARCHAR(256),
+loginwith varchar(50), 
+nickname varchar(50),
+facebook_id VARCHAR(256));
+
+// DESC Name not allowed
+
+Create table products(id INT AUTO_INCREMENT PRIMARY KEY,
+ name varchar(100),
+image varchar(150),
+price double(10,2),
+description varchar(200),
+longDesc varchar(600),
+category_id int,
+createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+isDeleted boolean DEFAULT FALSE,
+foreign key (category_id) references categories(id)
+ )ENGINE=InnoDB;
+
+create table user_addr(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    fname varchar(30),
+    lname varchar(30),
+    address varchar(255),
+    city varchar(40),
+    state varchar(40),
+    zip varchar(40),
+    country varchar(40),
+    phone varchar(20),
+    user_id INT NOT NULL,
+foreign key (user_id) references user(ID)
+ON DELETE CASCADE
+)ENGINE = InnoDB;
+
+
+Query for join
+select * from user_addr join user ON user_addr.user_id = user.ID;
+    
+select * from cart join products ON cart.item_id = products.id 
+
+cart table:
+create table cart( ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+user_id INT NOT NULL,
+item_id INT NOT NULL,
+quantity INT DEFAULT 1,
+foreign key (user_id) references user(id),
+foreign key (item_id) references products(id)
+)ENGINE = InnoDB;
+
+Copy from one db to other
+(copy from cartDB to orderDB)
+INSERT INTO copy SELECT * FROM original;
+CREATE TABLE copy LIKE original;
+ALTER TABLE copy DISABLE KEYS
+INSERT INTO copy SELECT * FROM original;
+ALTER TABLE copy ENABLE KEYS;
+ COpy from cart to order:
+ insert into order_item(item_id,quantity) select item_id,quantity from cart where user_id=15;
+with data pre existed
+insert into order_item(order_id,item_id,quantity) select 5,item_id,quantity from cart where user_id 15;
+
+SUM all the items
+select sum(quantity) from cart where user_id = 3;
+INSERT INTO copy SELECT * FROM original;
+
+ORDER table:
+create table orders(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+addr_id INT NOT NULL,
+user_id INT NOT NULL,
+createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+status ENUM('ordered','shipped','delivered','cancelled'),
+amount double,
+foreign key (addr_id) references user_addr(ID),
+foreign key (user_id) references user(ID)
+)ENGINE=InnoDB;
+
+order_item TABLE:
+
+
+create table order_item(ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+order_id INT NOT NULL,
+item_id INT NOT NULL,
+quantity INT,
+itemPrice double(10,2),
+foreign key (order_id) references orders(ID),
+foreign key (item_id) references products(ID)
+)ENGINE=InnoDB;
+
+
+create table user_fb(
+    id varchar(256),
+    email varchar(100),
+    name varchar(256),
+    token varchar(256)
+)
+
+select * from products order by id desc limit 4,5; five rows after 4th
+0,10
+1,10
+req.query.page to 10
+
+CREATE TABLE categories(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(256),
+    slug VARCHAR(256),
+    parent_id INT,
+    foreign KEY (parent_id) references categories(ID)
+)ENGINE=InnoDB;
+
+
+
+TO-DO
+change id to lowercase in each query
