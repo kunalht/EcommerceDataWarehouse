@@ -73,5 +73,4 @@ CREATE TABLE user_fb(
     email varchar(100),
     name varchar(256),
     token varchar(256)
-)
-
+);

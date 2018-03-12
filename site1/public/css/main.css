@@ -162,7 +162,7 @@ a#scrollUp i{
 }
 
 .usa:hover {
-	background:#FE980F;
+	/* background:#FE980F; */
 	color:#fff;
 	border-color:#FE980F;
 }
