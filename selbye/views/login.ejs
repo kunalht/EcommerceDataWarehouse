@@ -1,0 +1,12 @@
+<% include ./partials/header %>
+Login page working
+<form action="/login" method="POST">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <button> Login </button>
+</form>
+<a href="/logout"> logout </a>
+
+<button class="btn btn-primary"> <a href="/login/facebook">facebook </a></button>
+
+<% include ./partials/footer %>

@@ -1,0 +1,9 @@
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}
+
+.d-flex {
+    display:flex;
+}

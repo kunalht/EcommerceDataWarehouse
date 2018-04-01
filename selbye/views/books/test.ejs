@@ -1,0 +1,48 @@
+<script> 
+function changeSelect( selectNo ) 
+{ 
+    console.log(selectNo.options[selectNo.selectedIndex].text)
+var sels = document.getElementById("subcats").getElementsByTagName('SELECT'); 
+for( var j=0; j<sels.length; j++ ) 
+{ 
+sels[j].style.display = "none"; 
+if ( j===(selectNo-1) ) 
+{ sels[j].style.display = ''; } 
+} 
+} 
+
+</script>
+
+<form action="/cats" method="POST">
+    <input type="text" name="name" placeholder="Book name">
+    <br>
+    <select name="category"  onchange="changeSelect( this.value )"> 
+<option value="0">Select Category</option> 
+<option value="1">ABC</option> 
+<option value="2">123</option> 
+<option value="3">abc</option> 
+</select>
+
+<div id="subcats"> 
+<select name="subcategory" style="display:none"> 
+<option value="0">Select Sub-Category</option> 
+<option value="1">A</option> 
+<option value="2">B</option> 
+<option value="3">C</option> 
+</select> 
+
+<select name="subcategory" style="display:none"> 
+<option value="0">Select Sub-Category</option> 
+<option value="1">1</option> 
+<option value="2">2</option> 
+<option value="3">3</option> 
+</select> 
+
+<select name="subcategory" style="display:none"> 
+<option value="0">Select Sub-Category</option> 
+<option value="1">a</option> 
+<option value="2">b</option> 
+<option value="3">c</option> 
+</select> 
+    <input type="submit" value="upload">
+</form>

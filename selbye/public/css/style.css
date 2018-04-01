@@ -1,0 +1,49 @@
+.form-control-inline {
+    min-width: 0;
+    width: 200%;
+    display: inline;
+}
+
+/*.d-flex {
+    display:flex;
+}*/
+
+.card img{
+    width: 100%;
+    height: 200px;
+}
+.showCard img{
+        height: 300px;
+}
+
+.card-space-top{
+    padding-top:20px;
+}
+.card{
+    padding: 0;
+}
+.sellerCard{
+    background-color:transparent;
+}
+
+.left-space{
+    padding-left:10px;
+}
+
+html{
+    height: auto;
+}
+
+.footer{
+    bottom: 0;
+    width: 100%;
+}
+/*.row.match-my-cols {
+    overflow: hidden; 
+}
+
+.row.match-my-cols [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}*/
+/* YOUR CUSTOM STYLES */

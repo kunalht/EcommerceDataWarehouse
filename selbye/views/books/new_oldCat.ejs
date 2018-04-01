@@ -1,0 +1,92 @@
+<% include ../partials/header %>
+    new working
+    <h1> Add new book </h1>
+    <script>
+        function changeSelect(selectNo) {
+            var sels = document.getElementById("subcats").getElementsByTagName('SELECT');
+            for (var j = 0; j < sels.length; j++) {
+                sels[j].style.display = "none";
+                if (j === (selectNo - 1))
+                { sels[j].style.display = ''; }
+            }
+            var val = document.getElementById('selectVal')
+            console.log("VAL " + val.options)
+            var currentCategory = val.options[val.selectedIndex].text;
+            console.log(currentCategory)
+        }
+    </script>
+    <form action="/books" enctype="multipart/form-data" method="POST">
+        <input type="text" name="name" placeholder="Book name" accept="image">
+        <input type="number" name="price" placeholder="price">
+        <input type="file" name="photo">
+        <br />
+        <br />
+        <br />
+        <textarea name="desc" cols="50" rows="10">
+    </textarea>
+        <input type="submit" value="upload">
+    </form>
+    <br>
+    <select name="category" id="selectVal" onchange="changeSelect( this.value )"> 
+                        <option value="0">Select category </option> 
+    <% var c = 1 %>
+
+    <% categories.forEach(function(cat){ %>
+    <% var i = cat.path %>
+    <% if(i){ %>
+    <%      if(i.endsWith(",books,")){ %>
+                <option value="<%= c %>"><%= cat._id %> </option> 
+
+
+        <!--<option value="c"><%= cat._id %></option> -->
+
+<!--<option value="<%= c %>">ABC</option> -->
+                <% c+= 1 %>
+                <% } %>
+    <% } %> 
+    <% }) %>
+            <!--<option value="0">cat._id </option> 
+                        <option value="1"> cat._id </option> 
+            <option value="2"> cat._id </option> -->
+
+
+    </select>
+    <script>
+values = document.getElementById('selectVal').options[0].innerText
+console.log(values = document.getElementById('selectVal').length)
+    </script>
+    <br>
+
+    <!--<select name="category" onchange="changeSelect( this.value )"> 
+<% for(var i=1;i<5;i++){ %>
+<option value="<%= i %>">ABCD</option> 
+<% } %>-->
+    <!--<option value="0">Select Category</option> 
+<option value="1">ABC</option> 
+<option value="2">123</option> 
+<option value="3">abc</option> -->
+    <!--</select> -->
+    <div id="subcats">
+        <select name="subcategory" style="display:none"> 
+<option value="0">Select Sub-Category</option> 
+<option value="1">A</option> 
+<option value="2">B</option> 
+<option value="3">C</option> 
+</select>
+
+        <select name="subcategory" style="display:none"> 
+<option value="0">Select Sub-Category</option> 
+<option value="1">1</option> 
+<option value="2">2</option> 
+<option value="3">3</option> 
+</select>
+
+        <select name="subcategory" style="display:none"> 
+<option value="0">Select Sub-Category</option> 
+<option value="1">a</option> 
+<option value="2">b</option> 
+<option value="3">c</option> 
+</select>
+
+
+        <% include ../partials/footer %>

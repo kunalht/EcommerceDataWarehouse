@@ -1,0 +1,127 @@
+<% include ../partials/header %>
+    <script>
+        var num
+        function changeSelect(selectNo) {
+            var sels = document.getElementById("subcats").getElementsByTagName('SELECT');
+            for (var j = 0; j < sels.length; j++) {
+                sels[j].style.display = "none";
+                if (j === (selectNo - 1))
+                { sels[j].style.display = ''; }
+            }
+            var val = document.getElementById('selectVal')
+            var currentCategory = val.options[val.selectedIndex].text;
+            num = val.options[val.selectedIndex].value
+            document.getElementById('category').value = currentCategory
+        }
+        function subCatFunc(subcatValue) {
+            var val = document.getElementById('subCat' + num)
+            var subCategory = val.options[val.selectedIndex].text;
+            document.getElementById('subCategory').value = subCategory
+        }
+    </script>
+
+    <div class="container jumbotron">
+        <h1 class="text-center">Add New Product </h1>
+        <form action="/books" enctype="multipart/form-data" method="POST">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="md-form">
+                        <input type="text" name="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="price" class="form-control" placeholder="Price" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="md-form">
+                        <textarea name="desc" type="text" class="md-textarea" placeholder="Details about the product"></textarea>
+                    </div>
+                </div>
+            </div>
+            <h4> Enter you location: </h4>
+            <br>
+            <div class="row">
+                <div class="col-md-12"> City: &nbsp;
+                    <input class="awesomplete" list="mylist" id="auto" name="city" />
+                </div>
+                <div class="col-md-12">
+                <br><p class="red-text"> Select your nearest city if your city isn't listed. </p>
+                </div>
+                <div class="col-md-12">
+                    <br> <input type="text" style="width:20%" name="locality" placeholder="Locality">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="h3-responsive" style="padding-top:15px"> Upload Book image: </h4>
+                </div>
+                <div class="col-md-9">
+                    <input type="file" class="btn btn-outline-info waves-effect" name="photo" accept="image/*">
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Select Category of book:</h4>
+                </div>
+                <div class="col-md-8">
+                    <input type="hidden" value="" name="category" id="category" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="hidden" value="" name="subCategory" id="subCategory" />
+                </div>
+            </div>
+
+            <select id="selectVal" onchange="changeSelect( this.value )"> 
+    <option value="0">Select category </option> 
+    <% var c = 1 %>
+    <% var arr = [] %>
+
+    <% categories.forEach(function(cat){ %>
+    <% var i = cat.path %>
+    <% if(i){ %>
+    <%      if(i.endsWith(",books,")){ %>
+    <% arr[arr.length] = cat._id %>
+                <option value="<%= c %>"><%= cat._id %> </option> 
+
+                <% c+= 1 %>
+                <% } %>
+    <% } %> 
+    <% }) %>
+        </select>
+            <div id="subcats">
+                <% for(var z =0; z<arr.length;z++){ %>
+                    <% var curr_id = ("subCat" + (z+1)) %>
+                        <select id="<%= curr_id %>" onchange="subCatFunc(this.value)" style="display:none"> 
+<% var counter = 0 %>
+    <option value="0">Select Sub-Category</option> 
+    <% categories.forEach(function(cat){ %>
+    <% var path = cat.path %>
+    <% if(path){ %>
+    <%      if(path.endsWith("," + arr[z] + ",")){ %>
+    <option value=" <%= counter %> "><%= cat._id %></option> 
+    <% counter+=1 %>
+    <%= cat._id %>
+    <% } %>
+        <% } %>
+                <% }) %>
+</select>
+                        <% } %>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-primary" value="upload">
+                                </div>
+                            </div>
+        </form>
+        </div>
+    </div>
+    <% include ../partials/footer %>

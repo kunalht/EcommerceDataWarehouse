@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> SelBye </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="/css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/awesomplete.css" />
+    <script src="/js/awesomplete.js" async></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/js/tether.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+
+    <!--<link href="css/simple-sidebar.css" rel="stylesheet">-->
+
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-toggleable-md fixed-top navbar-dark bg-primary">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            <a class="navbar-brand" href="/">
+            <strong>SelBye</strong>
+        </a>
+            <div class="collapse navbar-collapse" id="navbarNav1">
+                <ul class="navbar-nav mr-auto">
+                    <!--<li class="nav-item active">
+                        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                    </li>-->
+                    <li>
+                        <form action="/search" method="POST" class="form-inline waves-effect waves-light form-control-inline">
+                            <input class="form-control" style="width:200%" name="query" type="text" placeholder="Search book name">
+                        </form>
+
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <% if(!currentUser){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="modal" data-target="#modalLRForm">Login/Register</a>
+                        </li>
+                        <% } else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/books/new">
+                                Add new Book
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/<%= currentUser.username %>">
+                                    <%= currentUser.username %>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Log out </a>
+                            </li>
+                            <% } %>
+                            <% if(currentCity){ %>
+                                <li class="nav-item">
+                                    <a id="citySelect" class="nav-link" data-toggle="modal" data-target="#basicExample"><%= currentCity %> </a>
+                                </li>
+                                <% }else{ %>
+                                    <li class="nav-item">
+                                    <a id="citySelect" class="nav-link" data-toggle="modal" data-target="#basicExample">Select your city</a>
+                                </li>
+                                <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Modal: Login / Register Form-->
+    <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Modal cascading tabs-->
+                <div class="modal-c-tabs">
+                    <div class="modal-header">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tabs-2 white-text" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active title" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i> Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i> Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Tab panels -->
+                    <div class="tab-content">
+                        <!--Panel 7-->
+                        <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                            <!--Body-->
+                            <form action="/login" method="POST">
+                                <div class="modal-body mb-1">
+                                    <div class="md-form form-sm">
+                                        <i class="fa fa-user prefix"></i>
+                                        <input type="text" placeholder="Username" name="username" id="form22" class="form-control">
+                                        <!--<label for="form22">Your email</label>-->
+                                    </div>
+                                    <div class="md-form form-sm">
+                                        <i class="fa fa-lock prefix"></i>
+                                        <input type="password" name="password" placeholder="Password" id="form23" class="form-control">
+                                        <!--<label for="form23">Your password</label>-->
+                                    </div>
+                                    <div class="text-center mt-2">
+                                        <button class="btn btn-info">Log in <i class="fa fa-sign-in ml-1"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--<div class="row">-->
+                            <div class="col-md-12 col-xs-4">
+                                <div class="row text-center sign-with">
+                                    <div class="col-md-12">
+                                        <h2> OR </h2>
+                                        <br>
+                                        <h3>Login with</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="btn-group btn-group-justified">
+                                            <a href="/login/facebook" class="btn btn-primary"><i class="fa fa-facebook-official" aria-hidden="true"></i>  Facebook</a>
+                                            <a href="/login/google" class="btn btn-danger"><i class="fa fa-google-plus-square" aria-hidden="true"></i>  Google</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                            <!--Footer-->
+                            <div class="modal-footer display-footer">
+                                <div class="options text-center text-md-right mt-1">
+                                    <!--<p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>-->
+                                    <!--<p>Forgot <a href="#" class="blue-text">Password?</a></p>-->
+                                </div>
+                                <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close <i class="fa fa-times-circle ml-1"></i></button>
+                            </div>
+                        </div>
+                        <!--/.Panel 7-->
+                        <!--Panel 8-->
+                        <div class="tab-pane fade" id="panel8" role="tabpanel">
+                            <!--Body-->
+                            <form action="register" method="POST">
+                                <div class="modal-body">
+                                    <div class="md-form form-sm">
+                                        <i class="fa fa-envelope prefix"></i>
+                                        <input type="text" name="username" placeholder="Username" id="form24" pattern=".{6,}" title="Username should have atleast six characters" class="form-control">
+                                        <!--<label for="form24">Your email</label>-->
+                                    </div>
+                                    <div class="md-form form-sm">
+                                        <i class="fa fa-lock prefix"></i>
+                                        <input type="password" name="password" placeholder="Password" pattern=".{8,}" title="Password should have atleast eight characters" id="form25" class="form-control">
+                                        <!--<label for="form25">Your password</label>-->
+                                    </div>
+                                    <!--<div class="md-form form-sm">
+                                            <i class="fa fa-lock prefix"></i>
+                                            <input type="password" id="form26" class="form-control">
+                                            <label for="form26">Repeat password</label>
+                                        </div>-->
+                                    <div class="text-center form-sm mt-2">
+                                        <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-md-12 col-xs-4">
+                                <div class="row text-center sign-with">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <h2> OR </h2>
+                                        <br>
+                                        <h3>Register with</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="btn-group btn-group-justified">
+                                            <a href="/login/facebook" class="btn btn-primary"><i class="fa fa-facebook-official" aria-hidden="true"></i>  Facebook</a>
+                                            <a href="/login/google" class="btn btn-danger"><i class="fa fa-google-plus-square" aria-hidden="true"></i>  Google</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Footer-->
+                            <div class="modal-footer">
+                                <!--<div class="options text-right">
+                                    <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
+                                </div>-->
+                                <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close <i class="fa fa-times-circle ml-1"></i></button>
+                            </div>
+                        </div>
+                        <!--/.Panel 8-->
+                    </div>
+
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#basicExample">
+    Launch demo modal
+</button>-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title w-100" id="myModalLabel"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp; Select Your city</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="col-md-12 col-xs-4">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <form action="/location" method="POST">
+                                    <button onclick="getLocation()" type="button" class="btn btn-outline-info waves-effect"><i class="fa fa-location-arrow" aria-hidden="true"></i>  Auto Detect</button>
+                                    <br>
+                                    <p id="cityName"> </p>
+                                    <input type="hidden" value="" name="city" id="city_gps" />
+                                    <h2> OR </h2>
+                                    <br>
+                                    <h4> Enter city name here </h4>
+                                    <br>
+                                    <input class="awesomplete" list="mylist" id="auto" />
+                                    <input type="hidden" value="" name="city_list" id="city_list" >
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="save changes">
+                    </div>
+                    </form>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    </div>
+
+    <!-- City select modal -->
+    <!--<input class="awesomplete" list="mylist" id="auto" />-->
+    <br><br><br>
+    <div class="container">
+        <% if(success && success.length>0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <% } %>
+        <% if(error && error.length>0){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <% } %>
+    </div>
+    <!--<%# include ../partials/auto.html %>-->
+    <br>
+    <datalist id="mylist" class="list">
+        <option>Ahmedabad</option>
+        <option>Somnath</option>
+        <option>Dwarka</option>
+        <option>Surat</option>
+        <option>Bhuj</option>
+        <option>Gandhinagar</option>
+        <option>Junagadh</option>
+        <option>Bhavnagar</option>
+        <option>Vadodara</option>
+        <option>Rajkot</option>
+        <option>Jamnagar</option>
+        <option>Porbandar</option>
+        <option>Amreli</option>
+        <option>Anand</option>
+        <option>Banaskantha</option>
+        <option>Bharuch</option>
+        <option>Dahod</option>
+        <option>Kutch</option>
+        <option>Kheda</option>
+        <option>Mehsana</option>
+        <option>Navsari</option>
+        <option>Patan</option>
+        <option>Panchmahal</option>
+        <option>Sabarkantha</option>
+        <option>Surendranagar</option>
+        <option>Valsad</option>
+        <option>Vapi</option>
+
+    </datalist>
+    <a id="text"> </a>
+
+    <script>
+        //Check if the input is from options or not 
+        var inputs = document.querySelectorAll('.awesomplete');
+        for (var i = 0; i < inputs.length; i++) {
+            // When the value of the input changes...
+            inputs[i].addEventListener('change', function () {
+                var optionFound = false,
+                    datalist = document.getElementById("mylist")
+                // Determine whether an option exists with the current value of the input.
+                for (var j = 0; j < datalist.options.length; j++) {
+                    if (this.value == datalist.options[j].value) {
+                        var cityName = this.value
+                        optionFound = true;
+                        break;
+                    }
+                }
+                // use the setCustomValidity function of the Validation API
+                // to provide an user feedback if the value does not exist in the datalist
+                if (optionFound) {
+                    document.getElementById('city_list').value = cityName
+                }
+            });
+        }
+        // GEO Location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    api = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+                        position.coords.latitude + "," + position.coords.longitude +
+                        "&key=AIzaSyDAa6gPwQ_qGEiEjMOddgGyY3bDDTsGSnE"
+                    $.getJSON(api, function (data) {
+                        var length = data.results.length
+                        city = data.results[length - 3].address_components[0].long_name
+                        address = data.results[0].formatted_address
+                        var datalist = document.getElementById("mylist")
+                        var doesExist = false
+                        for (i = 0; i < datalist.options.length; i++) {
+                            if (city.toUpperCase() === datalist.options[i].value.toUpperCase()) {
+                                doesExist = true
+                            }
+                        }
+                        if (doesExist == true) {
+                            $("#cityName").text("Your location is set to " + city + ". If it's not correct,select manually below.");
+                            document.getElementById('city_gps').value = city
+                        } else {
+                            $("#cityName").text("SelBye is currently not available in your location. Please select nearest city")
+                        }
+
+                    });
+                });
+            }
+        }
+
+        //C OOkie
+        // function getCookie(name) {
+        //     var value = "; " + document.cookie
+        //     var parts = value.split("; " + name + "=");
+        //     if (parts.length == 2) return parts.pop().split(";").shift();
+        // }
+        // if (getCookie("city")) {
+        //     document.getElementById("citySelect").innerHTML = getCookie("city")
+        // } else {
+
+        // }
+    </script>

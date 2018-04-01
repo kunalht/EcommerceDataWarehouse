@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+    <br><br>
+        <div class="container jumbotron">
+            <h1 class="text-center"> Please choose a username </h1>
+            <form action="/username?_method=PUT" method="POST">
+                <div class="md-form">
+                        Username:
+                            <input type="text" class="form-control" name="username" style="width:40%">
+                </div>
+                <% if(doesExist == true){ %>
+                    <p class="red-text"> This username already exist. Please choose different username. </p>
+              <%  } %>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
+        </div>
+        <% include ../partials/footer %>

@@ -1,0 +1,40 @@
+messages
+    message_id
+    message_type
+    sender_id
+    timestamp
+
+message_recipient
+    message_id
+    user_id
+
+message_status
+    message_status_id
+    message_id
+    user_id
+    is_read
+    read_datetime
+    is_deleted
+    deleted_datetime
+
+
+//another one
+User
+----------------
+userID
+userName
+...
+...
+...
+
+Messages
+---------------
+messageID
+title
+body
+
+User_Messages
+----------------
+senderID (userID of sender)
+recieverID (userID of reciever)
+messageID (messageID of relative message)

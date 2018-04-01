@@ -1,0 +1,65 @@
+<% include ../partials/header %>
+    <br>
+    <br>
+    <!--Main layout-->
+    <div class="container-fluid">
+        <div class="row">
+            <!--Sidebar-->
+            <div class="col-lg-2 col-md-2">
+            </div>
+            <div class="col-lg-1 col-md-1">
+
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <% if(books.length>0){ %>
+                    <h1 class="text-center"> All Products available to buy </h1><br>
+                    <% for(var i=0;i<books.length;i++){ %>
+                        <% if(i%4 == 0 && i!= 0){ %>
+            </div>
+            <div class="row">
+                <% }else if(i==0){ %>
+                    <div class="row text-center">
+                        <%  } %>
+                            <div class="col-md-3 card-space-top">
+                                <div class="card">
+                                    <div class="view overlay hm-white-slight">
+                                        <img src="<%= books[i].image %>" class="img-responsive" alt="" >
+                                        <a href="/books/<%= books[i]._id %>">
+                                            <div class="mask"></div>
+                                        </a>
+                                    </div>
+                                    <!--/.Card image-->
+                                    <!--Card content-->
+                                    <div class="card-block">
+                                        <!--Title-->
+                                        <h4 class="card-title">
+                                            <%= books[i].name %>
+                                        </h4>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h4> <i class="fa fa-inr"> <%= books[i].price %></i> </h4>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="read-more">
+                                                    <a href="/books/<%= books[i]._id %>" class="btn btn-success">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/.Card content-->
+                                </div>
+                            </div>
+                            <% } %>
+                                <% }else{ %>
+                                    <h3 class="red-text">Sorry There are currently No books available under this category. Please Add new book
+                                        if you want to sell.
+                                    </h3>
+                                    
+                                    <% } %>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <% include ../partials/footer %>

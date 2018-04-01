@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+
+    <div class="container jumbotron">
+        <h1 class="text-center">Edit details of your Book </h1>
+        <form action="/books/<%= book._id %>?_method=PUT" method="POST">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="md-form">
+                        <input type="text" name="book[name]" class="form-control" value="<%= book.name %>" placeholder="Book Name" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="book[price]" class="form-control" placeholder="Price" value="<%= book.price %>" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" name="book[language]" class="form-control" value="<%= book.language %>" placeholder="Language">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="book[ISBN]" class="form-control" value="<%= book.ISBN %>" placeholder="ISBN Number">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="book[publisher]" class="form-control" value="<%= book.publisher %>" placeholder="Publisher">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" name="book[author]" class="form-control" value="<%= book.author %>" placeholder="Author">
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="book[pages]" class="form-control" value="<%= book.pages %>" placeholder="Pages">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="md-form">
+                        <textarea name="book[desc]" type="text" value="<%= book.desc %>" class="md-textarea" placeholder="Other details about book"></textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-primary" value="upload">
+                                </div>
+                            </div>
+        </form>
+        </div>
+    </div>
+    <% include ../partials/footer %>

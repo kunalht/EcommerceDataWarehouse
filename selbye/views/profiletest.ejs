@@ -1,0 +1,12 @@
+hello
+<% if(!currentUser){ %>
+    not user
+<% } else{ %>
+    user
+<% } %>
+
+<form action="/test?_method=PUT" method="POST">
+ Username: <input type="text" name="username">
+   <br>
+    <input type="submit">
+</form>

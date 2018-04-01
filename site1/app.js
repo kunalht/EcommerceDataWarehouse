@@ -179,6 +179,6 @@ app.use(adminRoutes)
 
 
 
-app.listen("3000", function () {
+app.listen("3001", function () {
     console.log("Server started")
 })

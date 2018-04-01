@@ -62,6 +62,7 @@ cartMiddleware.cart = function (req, res) {
     if (req.isAuthenticated()) {
         c.query('select * from cart join products ON cart.item_id=products.id where user_id=:userId',
             { userId: req.user.id }, function (err, cartItems) {
+                console.log(cartItems)
                 res.render('cart',{items:cartItems} )
             })
     }

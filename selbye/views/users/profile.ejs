@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+    <br><br>
+    <div class="container jumbotron">
+        <form action="/user/<%= currentUser.username %>?_method=PUT" method="POST">
+           <% if(emailGiven == false){ %>
+                Email* <input type="email" name="user[email]" placeholder="me@email.com"> 
+               <% } %>
+            <div class="row">
+                <div class="col-md-6">
+                    <br>Contact Number: <input type="number" name="user[contactno]" value="<%= user.contactno %>" placeholder="+91-123-456-7890">
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    <br><br>
+                    <input type="radio" name="user[isVisible]" value="true" checked> Visible <br>
+                </div>
+                <div class="col-md-2">
+                    <br><br>
+                    <input type="radio" name="user[isVisible]" value="false"> Private <br>
+                </div>
+            </div>
+            <br>
+            <p class="red-text">Note: Keeping Contact Number visible to everyone makes communication faster and easier OR if you want to keep
+                it private, we'll contact you by email if someone is interested in you book.
+            </p>
+            <input type="submit" class="btn btn-info" value="Save changes">
+    </div>
+    </div>
+    </form>

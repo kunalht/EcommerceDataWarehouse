@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Reverse Geocoding</title>
+    <script>
+        // Only change code below this line.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                api = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+                    position.coords.latitude + "," + position.coords.longitude +
+                    "&key=AIzaSyDAa6gPwQ_qGEiEjMOddgGyY3bDDTsGSnE"
+                console.log(api)
+                console.log(position)
+                $.getJSON(api, function (data) {
+                    var length = data.results.length
+                    console.log(data.results[0])
+                    console.log(data.results[length - 3].address_components[0].long_name)
+                    console.log(data.results[0].formatted_address)
+                    $.ajax({
+                        url: '/location',
+                        type: 'post', // performing a POST request
+                        data: {
+                            city: data.results[length - 3].address_components[0].long_name,
+                            address: data.results[0].formatted_address
+                        },
+                    }).done(function (msg) {
+                        $("#new").html(msg);
+                    })
+                });
+
+                $("#data").html("latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude);
+            });
+        }else{
+            console.log("NOT SELECT")
+        }
+        console.log("here")
+
+    // Only change code above this line.
+    </script>
+    <div id="data">
+        <h4>You are here:</h4>
+
+    </div>
+    <form action="/geo" method="POST">
+        <input type="submit" value="upload">
+    </form>
+    <script>
+        var api = "https://maps.googleapis.com/maps/api/geocode/json?latlng=22.2997129,73.1682239&key=AIzaSyDAa6gPwQ_qGEiEjMOddgGyY3bDDTsGSnE"
+        // var api = "https://maps.googleapis.com/maps/api/geocode/json?latlng=22.352760,70.590500&key=AIzaSyDAa6gPwQ_qGEiEjMOddgGyY3bDDTsGSnE"
+    </script>
+
+
+    <!--<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        width: 350px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+      #latlng {
+        width: 225px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <input id="latlng" type="text" value="40.714224,-73.961452">
+      <input id="submit" type="button" value="Reverse Geocode">
+    </div>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: 40.731, lng: -73.997}
+        });
+        var geocoder = new google.maps.Geocoder;
+        var infowindow = new google.maps.InfoWindow;
+
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeLatLng(geocoder, map, infowindow);
+        });
+      }
+
+      function geocodeLatLng(geocoder, map, infowindow) {
+        var input = document.getElementById('latlng').value;
+        var latlngStr = input.split(',', 2);
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[1]) {
+              map.setZoom(11);
+              var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+              infowindow.setContent(results[1].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAa6gPwQ_qGEiEjMOddgGyY3bDDTsGSnE&callback=initMap">
+    </script>
+  </body>
+</html>
+
+<script>
+    // Only change code below this line.
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        document.getElementById("data").innerHTML = "latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude
+    //   $("#data").html("latitude: " + position.coords.latitude + "<br>longitude: " + position.coords.longitude);
+    });
+  }
+console.log("here")
+
+    // Only change code above this line.
+  </script>
+  <div id = "data">
+    <h4>You are here:</h4>
+
+  </div>-->

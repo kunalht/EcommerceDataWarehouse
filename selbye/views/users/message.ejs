@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+    <br><br>
+    <div class="container jumbotron">
+        <form action="/message" method="POST">
+        <h3> Send message to <%= uname %> :</h3><br>
+        <input type="hidden" name="uname" value="<%= uname %>">
+            <div class="row"> 
+                <div class="col-md-12">
+                    <div class="md-form">Enter Your Message:
+                        <textarea name="msg" type="text" class="md-textarea" placeholder="Your Message"></textarea>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Send Message">
+        </form>
+    </div>
+
+    <% include ../partials/footer %>
