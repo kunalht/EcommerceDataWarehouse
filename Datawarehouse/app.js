@@ -23,12 +23,12 @@ app.set("view engine", "ejs")
 //MongoDB to MySQL
 let productMigrate = require('./migration/product')
 let orderMigrate = require('./migration/order')
-let dataWarehouse = require('./dw/warehouse')
+
 //Migration
 //MySQL to MySQL
 
-// let myProductMigrate = require('./migration/mysql/product');
+let myProductMigrate = require('./migration/mysql/product');
 
 // productMigrate.migrate();
 // orderMigrate.migrate();
-dataWarehouse.migrate();
+// myProductMigrate.migrate();

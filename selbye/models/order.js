@@ -23,6 +23,8 @@ var orderSchema = new mongoose.Schema({
         default: Date.now
     },
     fullName: String,
+    city: String,
+    state: String,
     address: String
 })
 

@@ -173,6 +173,8 @@ router.get("/books/:id/order", function(req, res) {
 router.post("/books/:id/order", function(req, res){
     var newOrder = {
         fullName: req.body.name,
+        city: req.body.city,
+        state: req.body.state,
         address: req.body.address,
         products: {
             id: req.params.id

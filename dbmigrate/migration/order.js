@@ -29,8 +29,10 @@ let migrate = () => {
                             }else{
                                 let address = order.address
                                 let createdAt = order.createdAt
+                                let city = order.city
+                                let state = order.state
                                 let mongoID = order._id.toString();
-                                pool.query('INSERT IGNORE INTO Orders(address,createdAt,mongoId) VALUES(?,?,?)',[address,createdAt,mongoID],(err,newOrder)=>{
+                                pool.query('INSERT IGNORE INTO Orders(address,createdAt,city,state,mongoId) VALUES(?,?,?,?,?)',[address,createdAt,city,state,mongoID],(err,newOrder)=>{
                                     //Add into order Items
                                     if(err){
                                         console.log(err)

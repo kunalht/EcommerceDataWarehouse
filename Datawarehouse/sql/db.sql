@@ -42,17 +42,6 @@ quantity INT
 --     FOREIGN KEY (parent_id) REFERENCES categories(id)
 -- )ENGINE=InnoDB;
 
--- CREATE TABLE Products(id INT AUTO_INCREMENT PRIMARY KEY,
--- name VARCHAR(100),
--- image VARCHAR(150),
--- price double(10,2),
--- description VARCHAR(200),
--- longDesc VARCHAR(600),
--- category_id int,
--- createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
--- isDeleted boolean DEFAULT FALSE,
--- foreign key (category_id) references categories(id)
---  )ENGINE=InnoDB;
 
 
 -- CREATE TABLE User_addr(
