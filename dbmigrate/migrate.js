@@ -1,8 +1,8 @@
 var express = require("express");
 var app = express();
 var mongoose = require("mongoose"),
-mysql = require('mysql'),
-mysqlAuth = require('./config/mysqlAuth')
+    mysql = require('mysql'),
+    mysqlAuth = require('./config/mysqlAuth')
 
 let pool = mysql.createPool({
     connectionLimit: 10,
@@ -31,4 +31,25 @@ let dataWarehouse = require('./dw/warehouse')
 
 // productMigrate.migrate();
 // orderMigrate.migrate();
-dataWarehouse.migrate();
+
+app.get('/', (req, res) => {
+    res.render("home")
+})
+
+app.get('/migrate', (req, res) => {
+    productMigrate.migrate();
+    orderMigrate.migrate();
+    res.redirect('back')
+})
+
+app.get('/dataview', (req, res) => {
+    dataWarehouse.view();
+})
+
+app.get('/warehouse', (req, res) => {
+    dataWarehouse.migrate();
+    res.redirect('back')
+})
+app.listen("3005", function () {
+    console.log("Migration started")
+})
