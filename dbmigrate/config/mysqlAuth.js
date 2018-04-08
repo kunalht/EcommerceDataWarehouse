@@ -1,9 +1,9 @@
 module.exports = {  
     mysqlAuth:{
-        host: 'localhost',
+        host: "127.0.0.1",
         user: 'root',
-        password: 'kunal',
+        password: 'kunal1',
         port: 3306,
-        db: 'dwdbmigratemongo'
+        database: 'dwmongo'
     }
   };

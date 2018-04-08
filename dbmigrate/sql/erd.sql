@@ -17,9 +17,7 @@ CREATE TABLE User_addr(
     zip VARCHAR(40),
     country VARCHAR(40),
     phone VARCHAR(20),
-    user_id INT NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id)
-ON DELETE CASCADE
+    user_id INT NOT NULL
 )ENGINE = InnoDB;
 
 CREATE TABLE Products(id INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,44 +28,24 @@ description VARCHAR(200),
 longDesc VARCHAR(600),
 category_id int,
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-isDeleted boolean DEFAULT FALSE,
-foreign key (category_id) references categories(id)
+isDeleted boolean DEFAULT FALSE
  )ENGINE=InnoDB;
-
-
-CREATE TABLE Cart(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-user_id INT NOT NULL,
-item_id INT NOT NULL,
-quantity INT DEFAULT 1,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (item_id) REFERENCES products(id)
-)ENGINE = InnoDB;
 
 CREATE TABLE Orders(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 addr_id INT NOT NULL,
 user_id INT NOT NULL,
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 status ENUM('ordered','shipped','delivered','cancelled'),
-amount double,
-FOREIGN KEY (addr_id) REFERENCES user_addr(id),
-FOREIGN KEY (user_id) REFERENCES user(id)
+amount double
 )ENGINE=InnoDB;
 
 CREATE TABLE Order_items(id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 order_id INT NOT NULL,
 item_id INT NOT NULL,
 quantity INT,
-itemPrice double(10,2),
-FOREIGN KEY (order_id) REFERENCES orders(id),
-FOREIGN KEY (item_id) REFERENCES products(id)
+itemPrice double(10,2)
 )ENGINE=InnoDB;
 
-CREATE TABLE user_fb(
-    id varchar(256),
-    email varchar(100),
-    name varchar(256),
-    token varchar(256)
-)
 
 CREATE TABLE FactTable(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -78,8 +56,8 @@ CREATE TABLE FactTable(
     state VARCHAR(40),
     amount INT,
     orderId INT UNIQUE,
-    FOREIGN KEY (addressId) REFERENCES dwsite1.User_addr(id),
-    FOREIGN KEY (orderId) REFERENCES dwsite1.Orders(id)
+    productId INT,
+    FOREIGN KEY (addressId) REFERENCES User_addr(id),
+    FOREIGN KEY (orderId) REFERENCES Orders(id),
+    FOREIGN KEY (productId) REFERENCES Products(id)
 )ENGINE=InnoDB;
-
-SELECT * FROM Orders AS O JOIN  User_addr  AS UA ON O.addr_id = UA.id;

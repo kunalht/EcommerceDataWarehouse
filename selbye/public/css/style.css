@@ -37,6 +37,7 @@ html{
 .footer{
     bottom: 0;
     width: 100%;
+    /* position: fixed; */
 }
 /*.row.match-my-cols {
     overflow: hidden; 

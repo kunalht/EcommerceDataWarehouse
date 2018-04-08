@@ -7,7 +7,7 @@ let pool = mysql.createPool({
     host: mysqlAuth.host,
     user: mysqlAuth.user,
     password: mysqlAuth.password,
-    database: 'dwdbmigratemongo',
+    database: mysqlAuth.database,
     port: mysqlAuth.port
 });
 

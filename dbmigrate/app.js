@@ -18,6 +18,9 @@ mongoose.connect("mongodb://localhost/ecommerce")
 
 app.set("view engine", "ejs")
 
+// pool.query('SHOW DATABASES',(db) => {
+//     console.log(db)
+// })
 
 //Migration
 //MongoDB to MySQL
@@ -29,6 +32,6 @@ let dataWarehouse = require('./dw/warehouse')
 
 // let myProductMigrate = require('./migration/mysql/product');
 
-// productMigrate.migrate();
+productMigrate.migrate();
 // orderMigrate.migrate();
-dataWarehouse.migrate();
+// dataWarehouse.migrate();

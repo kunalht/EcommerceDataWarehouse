@@ -6,8 +6,8 @@ let pool = mysql.createPool({
     connectionLimit: 10,
     host: mysqlAuth.host,
     user: mysqlAuth.user,
-    password: mysqlAuth.password,
-    database: 'datawarehouse',
+    password: 'kunal',
+    database: 'dwsite1',
     port: mysqlAuth.port
 });
 

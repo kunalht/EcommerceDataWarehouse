@@ -23,7 +23,8 @@ const c = new client({
     user: mysqlAuth.mysqlAuth.user,
     password: mysqlAuth.mysqlAuth.password,
     port: mysqlAuth.mysqlAuth.port,
-    db: mysqlAuth.mysqlAuth.db
+    db: mysqlAuth.mysqlAuth.db,
+    database: "dwsite1"
 })
 
 app.use(require("express-session")({
