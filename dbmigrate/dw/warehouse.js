@@ -35,6 +35,20 @@ let migrate = () => {
             })
         }
     })
+
+
+    pool.query('SELECT *,date(createdAt) AS date FROM dwdbmigratemongo.orders',(err,ordersETL) => {
+        if(err){
+            console.log(err)
+        }else{
+            console.log(ordersETL)
+            pool.query('INSERT IGNORE INTO dwwarehouse.FactTable(date,time,addressId,city,state,amount,orderId) VALUES()')
+        }
+    })
+}
+
+let view = (req, res) => {
+    res.send("VIEW")
 }
 
 module.exports = {

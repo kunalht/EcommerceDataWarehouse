@@ -72,14 +72,34 @@ CREATE TABLE user_fb(
 CREATE TABLE FactTable(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     date DATE,
-    time TIMESTAMP,
+    time TIMESTAMP UNIQUE,
     addressId INT,
     city VARCHAR(40),
     state VARCHAR(40),
     amount INT,
+<<<<<<< HEAD
     orderId INT UNIQUE,
     FOREIGN KEY (addressId) REFERENCES dwsite1.User_addr(id),
     FOREIGN KEY (orderId) REFERENCES dwsite1.Orders(id)
+=======
+    orderId INT,
+    FOREIGN KEY (addressId) REFERENCES datawarehouse.User_addr(id),
+    FOREIGN KEY (orderId) REFERENCES datawarehouse.Orders(id)
+>>>>>>> 7564add14877caa3663b02d87e6d42e11ac5067f
 )ENGINE=InnoDB;
+
+CREATE TABLE EditHistory(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    newText VARCHAR(50),
+    previousText VARCHAR(50),
+    editColumn VARCHAR(40),
+    editedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB;
+
+SELECT * FROM FactTable AS FT JOIN datawarehouse.orders AS O ON FT.orderId = O.id;
+
+INSERT INTO EditHistory(newText, previousText, editColumn) VALUES ("58 61st St", "722 Bridge Ave", "address");
+INSERT INTO EditHistory(newText, previousText, editColumn) VALUES ("Windsor", "Toronto", "City");
+INSERT INTO EditHistory(newText, previousText, editColumn) VALUES ("Reese", "J. RW", "name");
 
 SELECT * FROM Orders AS O JOIN  User_addr  AS UA ON O.addr_id = UA.id;
